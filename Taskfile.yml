@@ -1,12 +1,28 @@
-# https://taskfile.dev
-
-version: '2'
-
-vars:
-  GREETING: Hello, World!
+version: "2"
 
 tasks:
-  default:
+  clean:
     cmds:
-      - echo "{{.GREETING}}"
+      - rm -rf dist/
+      - mkdir dist/
+    silent: true
+
+  build:
+    deps: [clean]
+    env:
+      GOARM: "6"
+      GOARCH: "arm"
+      GOOS: "linux"
+    cmds:
+      - go build -o dist/blink cmd/blink/main.go
+    silent: true
+
+  upload:
+    cmds:
+      - scp dist/blink root@192.168.2.136:~/blink
+    silent: true
+
+  run:
+    cmds:
+      - ssh -t root@192.168.2.136 "~/blink"
     silent: true
