@@ -19,10 +19,10 @@ tasks:
 
   upload:
     cmds:
-      - scp dist/blink root@192.168.2.136:~/blink
+      - scp dist/blink root@192.168.2.137:~/blink
     silent: true
 
   run:
     cmds:
-      - ssh -t root@192.168.2.136 "~/blink"
+      - ssh -t root@192.168.2.137 "~/blink"
     silent: true
