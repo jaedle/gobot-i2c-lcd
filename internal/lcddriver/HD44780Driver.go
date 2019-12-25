@@ -145,19 +145,19 @@ func (h *HD44780Driver) SetCursor(row byte, col byte) error {
 		return fmt.Errorf("invalid row coordinate: %d", row)
 	}
 
-	return h.sendCommand(setAddressCommand | col + 1 + rowOffsets()[row])
+	return h.sendCommand(setAddressCommand | col + rowOffsets()[row])
 }
 
 func rowOffsets() []byte {
-	return []byte{0x00, 0x40-1}
+	return []byte{0x00, 0x40}
 }
 
 func validRow(r byte) bool {
-	return !(r > 2 || r < 1)
+	return !(r > 1 || r < 0)
 }
 
 func validColumn(c byte) bool {
-	return !(c > 16 || c < 1)
+	return !(c > 15 || c < 0)
 }
 
 func (h *HD44780Driver) sendCommand(command byte) error {

@@ -20,8 +20,10 @@ func main() {
 		lcd.Home()
 		gobot.Every(1000*time.Millisecond, func() {
 			led.Toggle()
-			lcd.SetCursor(0, 1)
-			lcd.WriteString("ASDF")
+			lcd.SetCursor(0, 0)
+			lcd.WriteString("1234")
+			lcd.SetCursor(0, 4)
+			lcd.WriteString("56")
 			lcd.SetCursor(1, 0)
 			lcd.Write('A')
 		})
